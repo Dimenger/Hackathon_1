@@ -18,25 +18,16 @@ export class ContextMenu extends Menu {
       const y = event.clientY;
       this.open(x, y);
     });
-    // // Закрываем меню при любом другом клике. Правый клик открывает новое меню, левый закрывает.
-    // window.addEventListener("mousedown", () => this.close());
 
-    this.el.addEventListener(
-      "click",
-      (event) => {
-        event.stopPropagation();
-        if (event.target.nodeName === "LI") {
-          const type = event.target.dataset.type;
-          const foundModule = this.modules.find(
-            (module) => module.type === type
-          );
-          if (foundModule) {
-            foundModule.instance.trigger();
-          }
+    this.el.addEventListener("click", (event) => {
+      if (event.target.nodeName === "LI") {
+        const type = event.target.dataset.type;
+        const foundModule = this.modules.find((module) => module.type === type);
+        if (foundModule) {
+          foundModule.instance.trigger();
         }
-      },
-      false
-    );
+      }
+    });
   }
 
   open(x, y) {
