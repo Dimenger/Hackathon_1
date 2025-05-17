@@ -5,30 +5,83 @@ export class ShapeModule extends Module {
   constructor(text) {
     super('shape', text)
   }
+
+    // Создаем рандомный цвет
+    static getRandomColor() {
+        const letters = "0123456789ABCDEF";
+        let color = "#";
+        for (let i = 0; i < 6; i++) {
+        color += letters[random(0, 15)];
+        }
+        return color;
+    }
+
+
   trigger() {
     const shapeHTML = document.createElement('div');
 
-    // Задаем рандомный размер и цвет
-    const shapeSize = random(60, 350)
-    function shapeColor() {
-        const colorPalette =["black", "red", "green", "blue", "yellow", "orange"];
-        return colorPalette[random(0, colorPalette.length - 1)]
-    }
-    // Рандомная позиция фигуры
-    const x = random(0, window.innerWidth - shapeSize);
-    const y = random(0, window.innerHeight - shapeSize);
+    // Задаем рандомный размер фигуры
+    const shapeSize1 = random(60, 350) // ширина
+    const shapeSize2 = random(60, 350) // высота
 
-    // Назначаем стили
-    shapeHTML.style.background = shapeColor();
-    shapeHTML.style.width = `${shapeSize}px`;
-    shapeHTML.style.height = `${shapeSize}px`;
+    // Создаем фигуры
+    const shapes = [
+        {
+            name: 'square',
+            shapeStyle: (div)=> {
+            div.style.background = ShapeModule.getRandomColor();
+            div.style.width = `${shapeSize1}px`;
+            div.style.height = `${shapeSize1}px`;
+            }
+        },
+       {
+            name: 'circle',
+            shapeStyle: (div)=> {
+            div.style.background = ShapeModule.getRandomColor();
+            div.style.width = `${shapeSize1}px`;
+            div.style.height = `${shapeSize1}px`;
+            div.style.borderRadius = "50%";
+            }
+        },
+        {
+            name: 'rectangle',
+            shapeStyle: (div)=> {
+            div.style.background = ShapeModule.getRandomColor();
+            div.style.width = `${shapeSize1}px`;
+            div.style.height = `${shapeSize2}px`;
+            }
+        },
+        {
+            name: 'oval',
+            shapeStyle: (div)=> {
+            div.style.background = ShapeModule.getRandomColor();
+            div.style.width = `${shapeSize1}px`;
+            div.style.height = `${shapeSize2}px`;
+            div.style.borderRadius = "50%";
+            }
+        },
+
+    ];
+
+    
+
+    // Рандомная позиция фигуры на странице
+    const x = random(0, window.innerWidth - shapeSize1);
+    const y = random(0, window.innerHeight - shapeSize1);
+
+    // Назначаем общие стили
     shapeHTML.style.position = 'absolute';
     shapeHTML.style.top = `${y}px`;
     shapeHTML.style.left =`${x}px`;
-    shapeHTML.style.borderRadius = '20%';
     shapeHTML.style.boxShadow = '5px 5px 15px rgba(0, 0, 0, 0.3)';
 
-    // Добавляем элемент в DOM
+    // Вибираем рандомную фигуру
+    const shape = shapes[random(0, shapes.length -1)];
+
+    // Применяем стили к фигуре 
+    shape.shapeStyle(shapeHTML);
+
+    // Добавляем фигуру в DOM
     document.body.append(shapeHTML);
 
   }
