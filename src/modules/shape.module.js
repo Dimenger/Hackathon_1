@@ -26,6 +26,7 @@ export class ShapeModule extends Module {
     shapeHTML.style.top = `${y}px`;
     shapeHTML.style.left =`${x}px`;
     shapeHTML.style.borderRadius = '20%';
+    shapeHTML.style.boxShadow = '5px 5px 15px rgba(0, 0, 0, 0.3)';
 
     // Добавляем элемент в DOM
     document.body.append(shapeHTML);
