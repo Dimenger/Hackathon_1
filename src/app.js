@@ -5,6 +5,8 @@ import { ShapeModule } from "./modules/shape.module.js";
 import { BackgroundModule } from "./modules/background.module.js";
 import { ClearModule } from "./modules/clear.module.js";
 import { CurrentDate } from "./modules/date.module.js";
+import { CustomMessageModule } from './modules/custom-message.module.js';
+
 
 // Заблокировать контекстное меню браузера
 document.addEventListener(
@@ -20,10 +22,13 @@ const backgroundModule = new BackgroundModule("Изменить фон");
 const clearModule = new ClearModule("Очистить экран");
 const currentDate = new CurrentDate("Текущее время");
 const shapeModule = new ShapeModule("Создать фигуру");
+const customMessageModule = new CustomMessageModule('Вызвать сообщение'); // Создание нового экземпляра модуля
+
 
 contextMenu.add(backgroundModule);
-contextMenu.add(clearModule);
 contextMenu.add(currentDate);
 contextMenu.add(shapeModule);
+contextMenu.add(customMessageModule);
+contextMenu.add(clearModule);
 
 console.log("Контекстное меню успешно создано!");
