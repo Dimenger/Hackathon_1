@@ -4,7 +4,7 @@ export class ContextMenu extends Menu {
   constructor(selector) {
     super(selector);
     this.el = document.querySelector(selector);
-    this.modules = []; // Массив хранимых модулей
+    this.modules = []; // Массив модулей
 
     document.body.addEventListener("click", (event) => {
       if (event.target.offsetParent !== this.el) {
@@ -12,7 +12,7 @@ export class ContextMenu extends Menu {
       }
     });
 
-    // Регистрируем обработчики событий
+    // Обработчики событий
     window.addEventListener("contextmenu", (event) => {
       const x = event.clientX;
       const y = event.clientY;
@@ -32,20 +32,20 @@ export class ContextMenu extends Menu {
 
   open(x, y) {
     this.el.style.display = "block"; // Показываем меню
-    this.el.style.left = `${x}px`; // Устанавливаем координату X
-    this.el.style.top = `${y}px`; // Устанавливаем координату Y
+    this.el.style.left = `${x}px`; // координата X
+    this.el.style.top = `${y}px`; // координата Y
   }
 
   close() {
-    this.el.style.display = "none"; // Скрываем меню
+    this.el.style.display = "none"; // Закрываем меню
   }
 
   add(module) {
-    const liElement = module.toHTML(); // Получаем HTML представление модуля
-    const domLiElement = document.createElement("li"); // Создание реального DOM-элемента
-    domLiElement.innerHTML = liElement; // Присваиваем созданный HTML
-    this.el.appendChild(domLiElement.firstElementChild); // Добавляем новый пункт меню
+    const liElement = module.toHTML(); // Получаем модуль
+    const domLiElement = document.createElement("li"); // Создание DOM-элемент
+    domLiElement.innerHTML = liElement;
+    this.el.appendChild(domLiElement.firstElementChild);
 
-    this.modules.push({ type: module.type, instance: module }); // Сохраняем модуль в виде объекта
+    this.modules.push({ type: module.type, instance: module }); // Сохраняем модуль в массив
   }
 }
