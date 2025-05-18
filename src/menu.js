@@ -4,7 +4,6 @@ export class ContextMenu extends Menu {
   constructor(selector) {
     super(selector);
     this.el = document.querySelector(selector);
-
     this.modules = []; // Массив хранимых модулей
 
     document.body.addEventListener("click", (event) => {
